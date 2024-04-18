@@ -22,14 +22,31 @@ export class MarkersPageComponent {
 			zoom: this.zoom, // starting zoom
 		});
 
-		const markerHtml = document.createElement('div');
-		markerHtml.innerHTML = 'Jorge Alejandro';
+		// const markerHtml = document.createElement('div');
+		// markerHtml.innerHTML = 'Jorge Alejandro';
 
+		// const marker = new Marker({
+		// 	// color: 'red',
+		// 	element: markerHtml,
+		// })
+		// 	.setLngLat(this.currentLngLat)
+		// 	.addTo(this.map);
+	}
+
+	createMarker() {
+		if (!this.map) return;
+		const color = '#xxxxxx'.replace(/x/g, (y) => ((Math.random() * 16) | 0).toString(16));
+		const lgnLat = this.map.getCenter();
+		this.addMarker(lgnLat, color);
+	}
+
+	addMarker(lngLat: LngLat, color: string) {
+		if (!this.map) return;
 		const marker = new Marker({
-			// color: 'red',
-			element: markerHtml,
+			color,
+			draggable: true,
 		})
-			.setLngLat(this.currentLngLat)
+			.setLngLat(lngLat)
 			.addTo(this.map);
 	}
 }
